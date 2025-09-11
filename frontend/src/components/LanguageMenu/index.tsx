@@ -15,7 +15,7 @@ const LanguageMenu = () => {
   };
 
   return (
-    <div className="flex items-center gap-2 text-white cursor-pointer relative group select-none">
+    <div className="lg:flex hidden items-center gap-2 text-white cursor-pointer relative group select-none">
       <BiWorld className="text-xl" />
       <div className="flex items-center gap-2">
         <span className="text-[15px]">{selectedLang}</span>

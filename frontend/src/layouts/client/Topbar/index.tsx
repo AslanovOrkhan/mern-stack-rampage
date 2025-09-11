@@ -13,13 +13,11 @@ import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 const Topbar = () => {
   return (
     <>
-      <section className="flex items-center justify-between bg-[#1F1F1F] py-3 px-5">
+      <section className="flex items-center justify-between bg-[#1F1F1F] py-3 px-8">
         <div>
-          <h1 className="text-3xl font-bold text-shadow-amber-950">
             <LanguageMenu />
-          </h1>
-        </div>
-        <div className="w-[50%] h-16 mx-auto flex items-center justify-center relative">
+         </div>
+        <div className="lg:w-[50%] w-full h-16 mx-auto flex items-center justify-center relative">
           <div className="absolute top-1/2 right-0 transform -translate-x-0 -translate-y-1/2 z-10 cursor-pointer custom-prev bg-transparent">
           <GoArrowRight className="text-white font-extrabold text-xl bg-[#1F1F1F]" />
           </div>
@@ -42,18 +40,18 @@ const Topbar = () => {
             className="mySwiper"
           >
             <SwiperSlide className="h-16 w-full flex relative overflow-hidden items-center justify-center bg-transparent">
-              <span className="uppercase text-white text-[18px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <span className="uppercase text-white lg:text-[18px] text-[12px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
                 free delivery for orders over 1000 tl
               </span>
             </SwiperSlide>
             <SwiperSlide className="h-16 w-full flex relative items-center justify-center bg-transparent">
-              <span className="uppercase text-white text-[18px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <span className="uppercase text-white lg:text-[18px] text-[12px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
                 free delivery for orders over 1000 tl
               </span>
             </SwiperSlide>
           </Swiper>
         </div>
-        <div className="flex items-center gap-4 text-xl px-6 py-5">
+        <div className="lg:flex hidden items-center gap-4 text-xl  py-5">
           <a href="#">
             <FaFacebookF className="text-lg text-white" />
           </a>
