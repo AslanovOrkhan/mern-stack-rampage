@@ -13,7 +13,7 @@ import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 const Topbar = () => {
   return (
     <>
-      <section className="flex items-center justify-between bg-[#1F1F1F] py-3 px-8">
+      <section className="flex items-center justify-between bg-[#1F1F1F] py-3 px-10">
         <div>
             <LanguageMenu />
          </div>

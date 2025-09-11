@@ -4,8 +4,52 @@
   height: 100%;
 }
 body {
-  background-color: #1F1F1F;
+  background-color: #fff;
 }
 :root {
   --header-logo-opacity: 1;
+}
+.nav-item {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: 0.7s;
+}
+.nav-item::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: #000;
+  transition: 0.3s;
+  z-index: -1;
+  border-radius: 32px;
+}
+
+.nav-item:hover::before {
+  height: 100%;
+}
+.nav-item:hover {
+  color: #fff;
+}
+
+.sale-price {
+  position: relative;
+}
+.sale-price::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  inset-block-start: 50%;
+  width: 100%;
+  transform: rotate(-15deg);
+  border-block-end: 1px solid red;
+}
+
+.swiper-pagination-bullet-active {
+    background: red;
+    width: 12px;
+    border-radius: 5px;
 }
