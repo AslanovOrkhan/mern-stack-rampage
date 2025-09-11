@@ -4,30 +4,54 @@ import {
   FaXTwitter,
   FaYoutube,
 } from "react-icons/fa6";
-// Import Swiper React components
-// import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
 import LanguageMenu from "../../../components/LanguageMenu";
-
-// import required modules
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css/navigation";
+import "swiper/css";
+import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 const Topbar = () => {
   return (
     <>
       <section className="flex items-center justify-between bg-[#1F1F1F] py-3 px-5">
         <div>
-          <h1 className="text-3xl font-bold text-shadow-amber-950"><LanguageMenu /></h1>
+          <h1 className="text-3xl font-bold text-shadow-amber-950">
+            <LanguageMenu />
+          </h1>
         </div>
-        <div className="w-[70%] h-15 mx-auto flex items-center justify-center">
-          {/* <Swiper direction={"vertical"} loop={true} className="mySwiper h-full flex items-center justify-center">
-            <SwiperSlide className="flex items-center justify-center h-full border text-center">
-              <span className="text-white text-sm text-center">FREE DELIVERY FOR ORDERS OVER 1000 TL</span>
+        <div className="w-[50%] h-16 mx-auto flex items-center justify-center relative">
+          <div className="absolute top-1/2 right-0 transform -translate-x-0 -translate-y-1/2 z-10 cursor-pointer custom-prev bg-transparent">
+          <GoArrowRight className="text-white font-extrabold text-xl bg-[#1F1F1F]" />
+          </div>
+          <div className="absolute top-1/2 left-0 transform -translate-x-0 -translate-y-1/2 z-10 cursor-pointer custom-next bg-transparent">
+            <GoArrowLeft className="text-white font-extrabold text-xl bg-[#1F1F1F]" />
+          </div>
+
+          <Swiper
+            pagination={{
+              type: "fraction",
+            }}
+            fadeEffect={{ crossFade: true }}
+            speed={1500} 
+            navigation={{
+              nextEl: ".custom-next",
+              prevEl: ".custom-prev",
+            }}
+            loop={true}
+            modules={[Navigation]}
+            className="mySwiper"
+          >
+            <SwiperSlide className="h-16 w-full flex relative overflow-hidden items-center justify-center bg-transparent">
+              <span className="uppercase text-white text-[18px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                free delivery for orders over 1000 tl
+              </span>
             </SwiperSlide>
-             <SwiperSlide className="flex items-center justify-center h-full border text-center">
-              <span className="text-white text-sm text-center">FREE DELIVERY FOR ORDERS OVER 1000 TL</span>
+            <SwiperSlide className="h-16 w-full flex relative items-center justify-center bg-transparent">
+              <span className="uppercase text-white text-[18px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                free delivery for orders over 1000 tl
+              </span>
             </SwiperSlide>
-          </Swiper> */}
+          </Swiper>
         </div>
         <div className="flex items-center gap-4 text-xl px-6 py-5">
           <a href="#">
