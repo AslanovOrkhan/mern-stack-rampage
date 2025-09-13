@@ -8,9 +8,11 @@ import "swiper/css";
   onClose: () => void;
 }
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import LightGallery from "../LightGallery";
 
 const ProductModal = ({ open, onClose }: ProductModalProps) => {
+  const [showGallery, setShowGallery] = useState(false);
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
@@ -36,17 +38,20 @@ const ProductModal = ({ open, onClose }: ProductModalProps) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="detail-slider bg-[#F8F8F8]">
-          <Swiper loop={true} slidesPerView={1} slidesPerGroup={1} className="mySwiper w-full h-full">
-            <SwiperSlide className="max-w-[100%] max-h-[80%] m-auto">
-                <img src={modalSwiperImage} className="w-[80%] h-full object-cover" alt="" />
-            </SwiperSlide>
-             <SwiperSlide className="max-w-[100%] max-h-[80%] m-auto">
-                <img src={modalSwiperImage} className="w-[80%] h-full object-cover" alt="" />
-            </SwiperSlide>
-             <SwiperSlide className="max-w-[100%] max-h-[80%] m-auto">
-                <img src={modalSwiperImage} className="w-[80%] h-full object-cover" alt="" />
-            </SwiperSlide>
-          </Swiper>
+          <div onClick={() => setShowGallery(true)}>
+            <Swiper loop={true} slidesPerView={1} slidesPerGroup={1} className="mySwiper w-full h-full">
+              <SwiperSlide className="max-w-[100%] max-h-[80%] m-auto">
+                  <img src={modalSwiperImage} className="w-[80%] h-full object-cover" alt="" />
+              </SwiperSlide>
+               <SwiperSlide className="max-w-[100%] max-h-[80%] m-auto">
+                  <img src={modalSwiperImage} className="w-[80%] h-full object-cover" alt="" />
+              </SwiperSlide>
+               <SwiperSlide className="max-w-[100%] max-h-[80%] m-auto">
+                  <img src={modalSwiperImage} className="w-[80%] h-full object-cover" alt="" />
+              </SwiperSlide>
+            </Swiper>
+          </div>
+          {showGallery && <LightGallery />}
         </div>
         <div className=""></div>
       </div>
