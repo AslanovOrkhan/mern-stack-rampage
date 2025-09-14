@@ -1,5 +1,6 @@
 import ClientLayout from "../layouts/client";
 import Home from "../pages/client/Home";
+import Login from "../pages/shared/Login";
 
 const ROUTES = [
   // client
@@ -10,6 +11,10 @@ const ROUTES = [
       {
         index: true,
         element: <Home />,
+      },
+       {
+        path: 'login',
+        element: <Login />,
       },
     ],
   },
