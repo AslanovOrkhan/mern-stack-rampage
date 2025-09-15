@@ -3,10 +3,19 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
-import { FaAngleLeft, FaAngleRight, FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+import {
+  FaAngleLeft,
+  FaAngleRight,
+  FaArrowLeftLong,
+  FaArrowRightLong,
+} from "react-icons/fa6";
 import ProductItem from "../../../components/productItem";
 import { FreeMode, Pagination, A11y } from "swiper/modules";
-
+import CategoryCard from "../../../components/CategoryCard";
+import AllProduct from "../../../assets/images/KONSEPT_RENDER.webp";
+import { useRef, useEffect } from "react";
+import type { SwiperRef } from "swiper/react";
+import BannerCard from "../../../components/BannerCard";
 const items = [
   "earphones",
   "gaming keyboard",
@@ -25,6 +34,12 @@ const Chip = ({ label }: { label: string }) => (
   </li>
 );
 const Home = () => {
+  const catSwiperRef = useRef<SwiperRef | null>(null);
+  useEffect(() => {
+    if (catSwiperRef.current && catSwiperRef.current.swiper) {
+      catSwiperRef.current.swiper.navigation.update();
+    }
+  }, []);
   return (
     <>
       <section className="w-full lg:h-[100vh] h-[85vh] lg:py-10 py-5 lg:px-10 px-2">
@@ -153,23 +168,25 @@ const Home = () => {
             </Swiper>
           </div>
           <div className="justify-between items-center hidden lg:flex">
-          <ul className="hidden lg:flex items-center justify-start gap-6 mt-6 rounded-3xl p-2">
-            {items.map((label) => (
-              <Chip key={label} label={label} />
-            ))}
-          </ul>
-          <div className="flex items-center gap-2 p-4">
-            <button
-              className="prod-prev cursor-pointer z-10 rounded-full bg-[#F4F4F4] w-12 h-12 grid place-items-center shadow hover:bg-white"
-              aria-label="Previous"
-            ><FaAngleLeft className="text-xl" /></button>
-            <button
-              className="prod-next cursor-pointer z-10 rounded-full bg-[#F4F4F4] w-12 h-12 grid place-items-center shadow hover:bg-white"
-              aria-label="Next"
-            >
-              <FaAngleRight className="text-xl" />
-            </button>
-          </div>
+            <ul className="hidden lg:flex items-center justify-start gap-6 mt-6 rounded-3xl p-2">
+              {items.map((label) => (
+                <Chip key={label} label={label} />
+              ))}
+            </ul>
+            <div className="flex items-center gap-2 p-4">
+              <button
+                className="prod-prev cursor-pointer z-10 rounded-full bg-[#F4F4F4] w-12 h-12 grid place-items-center shadow hover:bg-white"
+                aria-label="Previous"
+              >
+                <FaAngleLeft className="text-xl" />
+              </button>
+              <button
+                className="prod-next cursor-pointer z-10 rounded-full bg-[#F4F4F4] w-12 h-12 grid place-items-center shadow hover:bg-white"
+                aria-label="Next"
+              >
+                <FaAngleRight className="text-xl" />
+              </button>
+            </div>
           </div>
         </div>
         <div className="mt-6 relative">
@@ -194,6 +211,73 @@ const Home = () => {
             ))}
           </Swiper>
         </div>
+      </section>
+      <section className="category-container grid grid-cols-4 gap-5 py-6 px-2 lg:px-10">
+        <div className="bg-[#F8F8F8] relative overflow-hidden col-span-1 rounded-2xl hidden lg:flex flex-col items-center justify-end gap-6 py-9">
+          <img
+            src={AllProduct}
+            alt="category"
+            className="w-full h-full object-cover absolute top-0 left-0"
+          />
+          <span className="z-50 relative text-3xl text-white capitalize font-semibold before:absolute before:bottom-0 before:left-0 before:block before:w-0 before:h-[1px] before:bg-white hover:before:w-full before:transition-all before:duration-[600ms] cursor-pointer">
+            All Products
+          </span>
+        </div>
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+        {/* @ts-ignore */}
+        <Swiper
+          ref={catSwiperRef}
+          modules={[Pagination, Navigation]}
+          spaceBetween={16}
+          slidesPerView={1.2}
+          loop={true}
+          navigation={{ nextEl: ".cat-next", prevEl: ".cat-prev" }}
+          pagination={{ clickable: true }}
+          breakpoints={{
+            480: { slidesPerView: 1.5, spaceBetween: 16 },
+            640: { slidesPerView: 2, spaceBetween: 16 },
+            768: { slidesPerView: 3, spaceBetween: 20 },
+            1024: { slidesPerView: 3, spaceBetween: 24 },
+          }}
+          className="category-swiper lg:col-span-3 col-span-4 lg:rounded-2xl rounded-0 relative"
+        >
+          {[0, 1, 2, 3].map((i) => (
+            <SwiperSlide key={i} className="!h-auto">
+              <CategoryCard />
+            </SwiperSlide>
+          ))}
+          <div className="absolute top-1/2 -translate-y-1/2 left-0 z-10 lg:flex hidden">
+            <button
+              className="cat-prev ml-2 cursor-pointer z-10 rounded-full bg-[#F4F4F4] w-12 h-12 grid place-items-center shadow hover:bg-white"
+              aria-label="Previous"
+            >
+              <FaAngleLeft className="text-xl" />
+            </button>
+          </div>
+          <div className="absolute top-1/2 -translate-y-1/2 right-0 z-10 lg:flex hidden">
+            <button
+              className="cat-next mr-2 cursor-pointer z-10 rounded-full bg-[#F4F4F4] w-12 h-12 grid place-items-center shadow hover:bg-white"
+              aria-label="Next"
+            >
+              <FaAngleRight className="text-xl" />
+            </button>
+          </div>
+        </Swiper>
+      </section>
+      <section className="banner lg:py-16 py-6 lg:my-12 my-6 lg:px-10 px-2 bg-black relative">
+        <Swiper
+          modules={[Navigation, Pagination]}
+          slidesPerView={1}
+          loop={true}
+          pagination={true}
+          className="banner-swiper"
+        >
+          {[0, 1, 2].map((i) => (
+            <SwiperSlide key={i}>
+              <BannerCard />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </section>
     </>
   );
