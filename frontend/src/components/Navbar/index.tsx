@@ -1,19 +1,37 @@
- 
 const Navbar = () => {
-  return (
-    <ul className="flex items-center gap-10">
-      <li className="relative py-7">
-        <a href="#" className="nav-item capitalize text-xl font-semibold  rounded-4xl py-3 px-4 overflow-hidden">discover</a>
-        <ul className="flex-col items-start gap-3 rounded-b-3xl absolute top-[100%] bg-white min-w-64 py-2 px-3 border border-black hidden">
-            <li><a href="#" className="text-black">Monitor</a></li>
-            <li><a href="#" className="text-black">Steering wheel</a></li>
-            <li><a href="#" className="text-black">Gaming Chair</a></li>
-            <li><a href="#" className="text-black">Other Products</a></li>
-            <li><a href="#" className="text-black">Headphones and Microphone</a></li>
-        </ul>
-      </li>  
-     </ul>
-  )
-}
-
-export default Navbar
+   return (
+    <>
+    <ul className="hidden lg:flex items-center justify-center gap-9">
+      <li className="py-6"><a href="#" className="  relative z-[1] overflow-hidden 
+      capitalize text-xl font-semibold rounded-[32px] 
+      py-2 px-4 transition-all duration-700 
+      before:content-[''] before:absolute before:bottom-0 before:left-0 
+      before:w-full before:h-0 before:bg-black before:rounded-[32px] 
+      before:-z-[1] before:transition-all before:duration-300 
+      hover:before:h-full hover:text-white">Discover</a></li>
+      <li className="py-6"><a href="#" className="  relative z-[1] overflow-hidden 
+      capitalize text-xl font-semibold rounded-[32px] 
+      py-3 px-4 transition-all duration-700 
+      before:content-[''] before:absolute before:bottom-0 before:left-0 
+      before:w-full before:h-0 before:bg-black before:rounded-[32px] 
+      before:-z-[1] before:transition-all before:duration-300 
+      hover:before:h-full hover:text-white">Categories</a></li>
+      <li className="py-6"><a href="#" className="  relative z-[1] overflow-hidden 
+      capitalize text-xl font-semibold rounded-[32px] 
+      py-2 px-4 transition-all duration-700 
+      before:content-[''] before:absolute before:bottom-0 before:left-0 
+      before:w-full before:h-0 before:bg-black before:rounded-[32px] 
+      before:-z-[1] before:transition-all before:duration-300 
+      hover:before:h-full hover:text-white">Support and Drivers</a></li>
+      <li className="py-6"><a href="#" className="  relative z-[1] overflow-hidden 
+      capitalize text-xl font-semibold rounded-[32px] 
+      py-2 px-4 transition-all duration-700 
+      before:content-[''] before:absolute before:bottom-0 before:left-0 
+      before:w-full before:h-0 before:bg-black before:rounded-[32px] 
+      before:-z-[1] before:transition-all before:duration-300 
+      hover:before:h-full hover:text-white">Contact Us</a></li>
+    </ul>
+    </>
+  );
+};
+export default Navbar;
