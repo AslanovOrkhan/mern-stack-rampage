@@ -4,13 +4,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { FiEye } from "react-icons/fi";
 import { useRef } from "react";
-import ProductModal from "../ProductModal";
-import { useState } from "react";
+// import ProductModal from "../ProductModal";
+// import { useState } from "react";
 
 const ProductItem = () => {
   const swiperRef = useRef<any>(null);
   const rafRef = useRef<number | null>(null);
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
   const handleMouseMove: React.MouseEventHandler<HTMLDivElement> = (e) => {
     const container = e.currentTarget;
@@ -81,7 +81,7 @@ const ProductItem = () => {
           </Swiper>
           <button
             className="absolute cursor-pointer top-[5%] right-[5%] border border-gray-300 outline-none w-11 h-11 bg-white rounded-full flex items-center justify-center opacity-0 visibility-hidden group-hover:opacity-100 group-hover:visibility-visible transition-all duration-500 z-50"
-            onClick={() => setShowModal(true)}
+            // onClick={() => setShowModal(true)}
           >
             <FiEye className="text-[17px]" />
           </button>
@@ -112,7 +112,7 @@ const ProductItem = () => {
           </div>
         </div>
       </div>
-      <ProductModal open={showModal} onClose={() => setShowModal(false)} />
+      {/* <ProductModal open={showModal} onClose={() => setShowModal(false)} /> */}
     </>
   );
 };

@@ -16,6 +16,8 @@ import AllProduct from "../../../assets/images/KONSEPT_RENDER.webp";
 import { useRef, useEffect } from "react";
 import type { SwiperRef } from "swiper/react";
 import BannerCard from "../../../components/BannerCard";
+import ProductModal from "../../../components/ProductModal";
+import LightGallery from "../../../components/LightGallery";
 const items = [
   "earphones",
   "gaming keyboard",
@@ -279,6 +281,8 @@ const Home = () => {
           ))}
         </Swiper>
       </section>
+      {/* <ProductModal/> */}
+      {/* <LightGallery /> */}
     </>
   );
 };
