@@ -2,7 +2,7 @@ import Topbar from './Topbar'
 import Header from './Header'
 import { Outlet } from 'react-router'
 import Footer from './Footer'
-// import FooterService from '../../components/FooterService'
+import FooterService from '../../components/FooterService'
 
 const ClientLayout = () => {
   return (
@@ -10,7 +10,7 @@ const ClientLayout = () => {
       <Topbar />
       <Header />
       <Outlet />
-      {/* <FooterService /> */}
+      <FooterService />
       <Footer />
     </div>
   )
