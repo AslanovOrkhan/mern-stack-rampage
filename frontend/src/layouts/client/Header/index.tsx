@@ -4,10 +4,10 @@ import Navbar from "../../../components/Navbar"
 import { SlBasket } from "react-icons/sl"
 import { IoSearchOutline } from "react-icons/io5"
 import { Link } from "react-router"
-import { RiMenu2Line, RiMenu3Line } from "react-icons/ri"
+import { RiMenu2Line } from "react-icons/ri"
 const Header = () => {
   return (
-    <header className='w-full bg-white px-2 lg:px-10 lg:py-0 py-6 flex items-center justify-between lg:gap-0 gap-3'>
+    <header className='relative w-full bg-white px-2 lg:px-10 lg:py-0 py-6 flex items-center justify-between lg:gap-0 gap-3'>
       <RiMenu2Line className="lg:hidden flex text-2xl"/>
       <Link to="/" className='main-logo'>
         <img src={logo} alt="Logo"  className='lg:w-36 w-32'/>

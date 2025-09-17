@@ -1,5 +1,3 @@
-// ContactInfo.tsx
-import React from "react";
 
 const ContactInfo = () => {
   return (
@@ -8,7 +6,6 @@ const ContactInfo = () => {
         Communication
       </h2>
       <div className="rounded-xl border border-gray-100 shadow-lg overflow-hidden">
-        {/* Address */}
         <div className="lg:py-9 py-6 lg:px-6 px-3 grid grid-cols-3 items-center gap-3 border-b border-gray-100">
           <span className="text-gray-600 lg:text-xl text-lg font-medium text-left">Address:</span>
           <span className="col-span-2 text-center text-gray-700 lg:text-xl text-lg">
@@ -16,7 +13,6 @@ const ContactInfo = () => {
           </span>
         </div>
 
-        {/* Telephone */}
         <div className="lg:py-9 py-6 lg:px-6 px-3 grid grid-cols-3 items-center gap-3 border-b border-gray-100">
           <span className="text-gray-600 lg:text-xl text-lg  font-medium text-left">
             Telephone:
@@ -26,7 +22,6 @@ const ContactInfo = () => {
           </span>
         </div>
 
-        {/* Email */}
         <div className="lg:py-9 py-6 lg:px-6 px-3 grid grid-cols-3 items-center gap-3">
           <span className="text-gray-600 lg:text-xl text-lg font-medium text-left">Email:</span>
           <span className="col-span-2 text-center text-gray-700 break-all lg:text-xl text-lg">
@@ -35,16 +30,13 @@ const ContactInfo = () => {
         </div>
       </div>
 
-      {/* Form Title */}
       <h2 className="text-3xl md:text-4xl font-semibold mb-4 mt-18 capitalize">Get in touch</h2>
 
-      {/* Form Card */}
       <div className="rounded-2xl border border-gray-100 shadow-lg bg-white p-5 md:p-7">
         <form
           onSubmit={(e) => e.preventDefault()}
           className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
         >
-          {/* Full name */}
           <div className="md:col-span-1">
             <label
               htmlFor="fullName"
@@ -62,7 +54,6 @@ const ContactInfo = () => {
             />
           </div>
 
-          {/* Email */}
           <div className="md:col-span-1">
             <label
               htmlFor="email"
@@ -80,7 +71,6 @@ const ContactInfo = () => {
             />
           </div>
 
-          {/* Message */}
           <div className="md:col-span-2">
             <label
               htmlFor="message"
@@ -98,7 +88,6 @@ const ContactInfo = () => {
             />
           </div>
 
-          {/* Footer / Actions */}
           <div className="md:col-span-2 flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 mt-2">
             <p className="text-sm text-gray-500">
               We usually respond within{" "}
@@ -111,7 +100,7 @@ const ContactInfo = () => {
                 className="inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold
                            text-white bg-gradient-to-r from-black to-gray-800
                            shadow-md hover:shadow-xl active:scale-[0.99]
-                           transition"
+                           transition cursor-pointer"
               >
                 Send message
               </button>
