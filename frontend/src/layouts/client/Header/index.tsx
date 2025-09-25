@@ -5,14 +5,16 @@ import { SlBasket } from "react-icons/sl"
 import { IoSearchOutline } from "react-icons/io5"
 import { Link } from "react-router"
 import { RiMenu2Line } from "react-icons/ri"
+import { useState } from "react"
 const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <header className='relative w-full bg-white px-2 lg:px-10 lg:py-0 py-6 flex items-center justify-between lg:gap-0 gap-3'>
-      <RiMenu2Line className="lg:hidden flex text-2xl"/>
+      <RiMenu2Line className="lg:hidden flex text-2xl cursor-pointer"   onClick={() => setMenuOpen(!menuOpen)}/>
       <Link to="/" className='main-logo'>
         <img src={logo} alt="Logo"  className='lg:w-36 w-32'/>
       </Link>
-      <Navbar />
+      <Navbar menuOpen={menuOpen}/>
       <div className="user-menu flex items-center lg:gap-6 gap-2">
         <IoSearchOutline className="lg:text-3xl text-2xl"/>
         <Link to="/login">
