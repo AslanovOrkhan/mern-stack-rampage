@@ -1,4 +1,7 @@
+import AdminLayout from "../layouts/admin";
 import ClientLayout from "../layouts/client";
+import Dashboard from "../pages/admin/Dashboard";
+import UserProfile from "../pages/admin/UserProfile";
 import ContactInfo from "../pages/client/Contact";
 import Home from "../pages/client/Home";
 import Register from "../pages/client/Register";
@@ -28,6 +31,21 @@ const ROUTES = [
       },
     ],
   },
+  // admin
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: "user-profile",
+        element: <UserProfile />,
+      },
+    ],
+  }
 ];
 
 export default ROUTES;
