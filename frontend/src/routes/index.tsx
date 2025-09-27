@@ -1,6 +1,7 @@
 import AdminLayout from "../layouts/admin";
 import ClientLayout from "../layouts/client";
 import Dashboard from "../pages/admin/Dashboard";
+import Orders from "../pages/admin/Orders";
 import UserProfile from "../pages/admin/UserProfile";
 import ContactInfo from "../pages/client/Contact";
 import Home from "../pages/client/Home";
@@ -43,6 +44,10 @@ const ROUTES = [
       {
         path: "user-profile",
         element: <UserProfile />,
+      },
+       {
+        path: "orders",
+        element: <Orders />,
       },
     ],
   }

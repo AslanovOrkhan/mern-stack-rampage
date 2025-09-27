@@ -1,7 +1,12 @@
 import { FaRegHandPointRight } from "react-icons/fa6";
-import { IoEyeOff } from "react-icons/io5";
+import { IoEyeOff, IoEye } from "react-icons/io5";
 import { Link } from "react-router";
+import { useState } from "react";
+
 const Register = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   return (
     <>
       <form
@@ -13,53 +18,105 @@ const Register = () => {
         </span>
         <div className="w-full flex flex-col items-start gap-9">
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 w-full">
+            {/* First Name */}
             <div className="bg-[#FAFAFA] py-5 px-3 w-full rounded-xl">
               <input
+                id="firstName"
                 type="text"
+                name="firstName"
                 placeholder="First Name"
                 className="bg-transparent border-none outline-none w-full"
               />
             </div>
+            {/* Last Name */}
             <div className="bg-[#FAFAFA] py-5 px-3 w-full rounded-xl">
               <input
+                id="lastName"
                 type="text"
+                name="lastName"
                 placeholder="Last Name"
                 className="bg-transparent border-none outline-none w-full"
               />
             </div>
+            {/* User Name */}
             <div className="bg-[#FAFAFA] py-5 px-3 w-full rounded-xl">
               <input
+                id="username"
                 type="text"
+                name="username"
                 placeholder="User Name"
                 className="bg-transparent border-none outline-none w-full"
               />
             </div>
+            {/* Email */}
             <div className="bg-[#FAFAFA] py-5 px-3 w-full rounded-xl">
               <input
+                id="email"
                 type="email"
+                name="email"
                 placeholder="Email"
                 className="bg-transparent border-none outline-none w-full"
               />
             </div>
+            {/* Phone Number */}
+            <div className="bg-[#FAFAFA] py-5 px-3 w-full rounded-xl">
+              <input
+                id="phone"
+                type="tel"
+                name="phone"
+                placeholder="Phone Number"
+                className="bg-transparent border-none outline-none w-full"
+              />
+            </div>
+            {/* Password */}
             <div className="flex items-center justify-between gap-3 bg-[#FAFAFA] py-5 px-3 w-full rounded-xl">
               <input
-                type="password"
+                id="password"
+                type={showPassword ? "text" : "password"}
+                name="password"
                 placeholder="Password"
                 className="bg-transparent border-none outline-none w-full"
               />
-              <IoEyeOff className="text-2xl cursor-pointer" />
+              {showPassword ? (
+                <IoEye
+                  className="text-2xl cursor-pointer"
+                  onClick={() => setShowPassword(false)}
+                />
+              ) : (
+                <IoEyeOff
+                  className="text-2xl cursor-pointer"
+                  onClick={() => setShowPassword(true)}
+                />
+              )}
             </div>
+            {/* Confirm Password */}
             <div className="flex items-center justify-between gap-3 bg-[#FAFAFA] py-5 px-3 w-full rounded-xl">
               <input
-                type="confirm-password"
+                id="confirmPassword"
+                type={showConfirmPassword ? "text" : "password"}
+                name="confirmPassword"
                 placeholder="Confirm Password"
                 className="bg-transparent border-none outline-none w-full"
               />
-              <IoEyeOff className="text-2xl cursor-pointer" />
+              {showConfirmPassword ? (
+                <IoEye
+                  className="text-2xl cursor-pointer"
+                  onClick={() => setShowConfirmPassword(false)}
+                />
+              ) : (
+                <IoEyeOff
+                  className="text-2xl cursor-pointer"
+                  onClick={() => setShowConfirmPassword(true)}
+                />
+              )}
             </div>
           </div>
+          {/* Buttons */}
           <div className="w-full grid lg:grid-cols-2 grid-cols-1 lg:gap-9 gap-3 mt-6">
-            <button className="border bg-black text-white py-5 rounded-4xl cursor-pointer">
+            <button
+              type="submit"
+              className="border bg-black text-white py-5 rounded-4xl cursor-pointer"
+            >
               Create
             </button>
             <Link
@@ -69,7 +126,8 @@ const Register = () => {
               Sign in
             </Link>
           </div>
-        </div>
+        </div> 
+        {/* Return to Store */}
         <Link to="/" className="flex items-center justify-center gap-3">
           <FaRegHandPointRight className="text-xl mt-1" />
           <span className="text-2xl">Return to Store</span>
