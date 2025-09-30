@@ -9,7 +9,7 @@ const AdminLayout = () => {
       <Sidebar/>
       <div className="bg-white flex flex-col items-start justify-start w-full">
         <AdminNavbar/>
-        <div className="admin-content w-full h-screen bg-[#111827] overflow-y-auto">
+        <div className="admin-content w-full h-screen bg-[#111827] overflow-auto">
           <Outlet />
         </div>
       </div>
