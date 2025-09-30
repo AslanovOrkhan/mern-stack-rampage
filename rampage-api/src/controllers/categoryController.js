@@ -6,7 +6,7 @@ const {
   deleteOne,
   update,
 } = require("../services/categoryService");
-const { deleteMany } = require("../services/productService");
+// const { deleteMany } = require("../services/productService");
 const formatMongoData = require("../utils/formatMongoData");
 
 //get all categories

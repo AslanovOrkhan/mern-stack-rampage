@@ -11,7 +11,7 @@ const {
   resetPassword,
 } = require("../controllers/userController");
 const uploadMiddleware = require("../middlewares/uploadMiddleware");
-const authToken = require("...middlewares/authToken");
+const authToken = require("../middlewares/authToken");
 
 const router = express.Router();
 
