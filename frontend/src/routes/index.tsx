@@ -1,5 +1,6 @@
 import AdminLayout from "../layouts/admin";
 import ClientLayout from "../layouts/client";
+import CategoryPage from "../pages/admin/CategoryPage";
 import Dashboard from "../pages/admin/Dashboard";
 import Orders from "../pages/admin/Orders";
 import UserProfile from "../pages/admin/UserProfile";
@@ -48,6 +49,10 @@ const ROUTES = [
        {
         path: "orders",
         element: <Orders />,
+      },
+         {
+        path: "categories",
+        element: <CategoryPage />,
       },
     ],
   }
