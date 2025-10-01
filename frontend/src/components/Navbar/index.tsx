@@ -71,11 +71,21 @@ const Navbar = () => {
             Categories
           </a>
           <ul className="grid grid-cols-5 gap-3 absolute top-[100%] left-0  z-50 bg-white  h-[70vh] w-full rounded-b-xl px-6 py-6  opacity-0 scale-y-0 group-hover:opacity-100 group-hover:scale-y-100 transition-all duration-800 origin-top">
-          <li><NavbarCategoryCard /></li>
-          <li><NavbarCategoryCard /></li>
-          <li><NavbarCategoryCard /></li>
-          <li><NavbarCategoryCard /></li>
-          <li><NavbarCategoryCard /></li>
+            <li>
+              <NavbarCategoryCard />
+            </li>
+            <li>
+              <NavbarCategoryCard />
+            </li>
+            <li>
+              <NavbarCategoryCard />
+            </li>
+            <li>
+              <NavbarCategoryCard />
+            </li>
+            <li>
+              <NavbarCategoryCard />
+            </li>
           </ul>
         </li>
         <li className="py-6 relative group">
@@ -102,12 +112,12 @@ const Navbar = () => {
               </a>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to="brands"
                 className="text-lg font-semibold relative before:content-[''] before:absolute before:left-0 before:bottom-0 before:h-[2px] before:w-0 before:bg-black before:transition-all before:duration-500 hover:before:w-full"
               >
                 Drivers
-              </a>
+              </Link>
             </li>
           </ul>
         </li>

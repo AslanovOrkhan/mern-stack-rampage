@@ -40,13 +40,13 @@ const Sidebar = () => {
             <span className="capitalize text-lg font-bold">dashboard</span>
           </Link>
         </li> 
-        <li className="w-full" ref={dropdownRef}>
+        <li className="w-full cursor-pointer" ref={dropdownRef}>
           <button
             onClick={() => setCatalogOpen(!catalogOpen)}
             className="flex items-center justify-start gap-3 text-[#9CA3AF] hover:text-white transition-all duration-300 w-full text-left"
           >
             <FaSlack className="text-xl" />
-             <span className="capitalize text-lg font-bold ml-2">catalog</span>
+             <span className="capitalize text-lg font-bold ml-2 cursor-pointer">catalog</span>
              <FaChevronRight className={`text-[12px] mt-1 transition-transform duration-300 ease-in-out ${catalogOpen ? 'rotate-90' : 'rotate-0'}`} />
           </button>
           <div className={`overflow-hidden transition-all duration-300 ease-in-out ${catalogOpen ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0'}`}>
@@ -55,7 +55,7 @@ const Sidebar = () => {
                 <Link to="/admin/categories" className="text-[#9CA3AF] hover:text-white transition-colors text-sm flex items-center gap-3"><TfiLayoutLineSolid /> Categories</Link>
               </li>
               <li className={`transform transition-all duration-200 delay-100 ${catalogOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'}`}>
-                <Link to="/admin/products" className="text-[#9CA3AF] hover:text-white transition-colors text-sm flex items-center gap-3"><TfiLayoutLineSolid /> Products</Link>
+                <Link to="/admin/products-management" className="text-[#9CA3AF] hover:text-white transition-colors text-sm flex items-center gap-3"><TfiLayoutLineSolid /> Products</Link>
               </li>
               <li className={`transform transition-all duration-200 delay-125 ${catalogOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'}`}>
                 <Link to="/admin/brands" className="text-[#9CA3AF] hover:text-white transition-colors text-sm flex items-center gap-3"><TfiLayoutLineSolid /> Brands</Link>
@@ -73,6 +73,15 @@ const Sidebar = () => {
           >
             <FiCompass className="text-xl" />{" "}
             <span className="capitalize text-lg font-bold">orders</span>
+          </Link>
+        </li> 
+         <li>
+          <Link
+            to="/admin/brands"
+            className="flex items-center justify-start gap-5 text-[#9CA3AF] relative"
+          >
+            <FiCompass className="text-xl" />
+            <span className="capitalize text-lg font-bold">brands</span>
           </Link>
         </li> 
          <li>

@@ -84,7 +84,7 @@ const Dashboard = () => {
         <OrdersCard />
         <OrdersCard />
       </section>
-      <section className="charts mt-20 grid grid-cols-2 gap-6 min-h-[400px]">
+      <section className="charts mt-20 grid grid-cols-2 gap-6">
         {" "}
         {/* <-- hündürlük verdik */}
         <ResponsiveContainer width="100%" height={300}>
