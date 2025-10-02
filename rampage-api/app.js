@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-// const productRouter = require("./src/routes/productRoute");
+const productRouter = require("./src/routes/productRoute");
 const categoryRouter = require("./src/routes/categoryRoute");
 // const sliderRouter = require("./src/routes/sliderRoute");
 const userRouter = require("./src/routes/userRoute");
@@ -28,7 +28,7 @@ app.use(
 app.use(limiter);
 app.use(helmet());
 
-// app.use("/products", productRouter);
+app.use("/products", productRouter);
 app.use("/categories", categoryRouter);
 // app.use("/sliders", sliderRouter);
 app.use("/auth", userRouter);
