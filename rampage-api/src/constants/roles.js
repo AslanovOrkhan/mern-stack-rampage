@@ -1,8 +1,8 @@
-const roles = {
-  superadmin: "superadmin",
-  admin: "admin",
-  customer: "customer",
-  courier: "courier",
-};
+// const roles = {
+//   superadmin: "superadmin",
+//   admin: "admin",
+//   customer: "customer",
+//   courier: "courier",
+// };
 
-module.exports = roles;
+// module.exports = roles;

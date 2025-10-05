@@ -1,17 +1,10 @@
 const Joi = require("joi");
 
-// Create üçün
-const createCategorySchema = Joi.object({
-  name: Joi.string().min(2).max(60).required(),
-  description: Joi.string().min(10).max(1000).required(),
-  image: Joi.string().uri().optional().allow(""),
+const categoryValidationSchema = Joi.object({
+  name: Joi.string().min(2).max(30).required(),
+  description: Joi.string().min(10).max(500).required(),
+  categoryImage: Joi.string().uri().required(),
+  slug: Joi.string().min(2).max(50).required(),
 });
 
-// Update üçün
-const updateCategorySchema = Joi.object({
-  name: Joi.string().min(2).max(60),
-  description: Joi.string().min(10).max(1000),
-  image: Joi.string().uri().optional().allow(""),
-}).min(1); // ən azı bir sahə olmalıdır
-
-module.exports = { createCategorySchema, updateCategorySchema };
+module.exports = categoryValidationSchema;

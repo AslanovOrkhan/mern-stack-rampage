@@ -27,11 +27,13 @@ exports.getProducts = async (req, res, next) => {
     const safeSortBy = allowedSortFields.includes(sortBy) ? sortBy : "price";
     const sortOrder = order.toLowerCase() === "desc" ? -1 : 1;
 
+    // Search filter
     const filter = {};
     if (search.trim()) {
       filter.name = { $regex: search.trim(), $options: "i" }; // case-insensitive search
     }
 
+    // Get products with pagination, sorting, and filtering
     const products = await getAll({
       page: pageNumber,
       limit: pageSize,

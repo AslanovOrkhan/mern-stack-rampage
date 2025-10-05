@@ -7,45 +7,26 @@ const categorySchema = new mongoose.Schema(
       trim: true,
       minLength: 2,
       required: true,
-      unique: true, // təkrar olmasın
+    },
+    slug: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    categoryImage: {
+      type: String,
+      required: true,
     },
     description: {
       type: String,
       required: true,
-    },
-    image: {
-      type: String, // image URL və ya file path
-      default: "",
-    },
-    slug: {
-      type: String,
-      unique: true,
-      index: true,
-      trim: true,
-    },
-    isActive: {
-      type: Boolean,
-      default: true,
+      minLength: 2,
     },
   },
-  { timestamps: true, versionKey: false }
+  { timestamps: true }
 );
 
-// slug avtomatik generasiya
-categorySchema.pre("validate", function (next) {
-  if (this.isModified("name") || !this.slug) {
-    this.slug = String(this.name)
-      .toLowerCase()
-      .trim()
-      .replace(/[\s_]+/g, "-")
-      .replace(/[^\w\-]+/g, "")
-      .replace(/\-+/g, "-")
-      .replace(/^\-+|\-+$/g, "");
-  }
-  next();
-});
-
-// category virtual for products
+ //category virtual for products
 categorySchema.virtual("products", {
   ref: "Product",
   localField: "_id",
@@ -56,4 +37,5 @@ categorySchema.virtual("products", {
 categorySchema.set("toObject", { virtuals: true });
 categorySchema.set("toJSON", { virtuals: true });
 
-module.exports = categorySchema;
+module.exports = mongoose.model("Category", categorySchema);
+

@@ -1,37 +1,16 @@
 const CategoryModel = require("../models/categoryModel");
 
-// Bütün kateqoriyalar (ən yenilər əvvəl) + products virtual populate
-const getAll = async () => {
-  return CategoryModel.find()
-    .sort({ createdAt: -1 })
-    .populate("products")
-    .exec();
-};
+const getAll = async () => await CategoryModel.find().populate("products");
 
-const getOne = async (id) => {
-  return CategoryModel.findById(id)
-    .populate("products")
-    .exec();
-};
+const getOne = async (id) =>
+  await CategoryModel.findById(id).populate("products");
 
-const post = async (payload) => {
-  // Validation middleware-in varsa, bura toxunmaq lazım deyil.
-  // İstəsən burada da minimal sanitizasiya edə bilərsən:
-  // if (payload.name) payload.name = payload.name.trim();
-  return CategoryModel.create(payload);
-};
+const post = async (payload) => await CategoryModel.create(payload);
 
-const deleteOne = async (id) => {
-  return CategoryModel.findByIdAndDelete(id).exec();
-};
+const deleteOne = async (id) => await CategoryModel.findByIdAndDelete(id);
 
-const update = async (id, payload) => {
-  return CategoryModel.findByIdAndUpdate(id, payload, {
-    new: true,
-    runValidators: true,  // update zamanı da schema qaydaları işləsin
-    context: "query",     // bəzi validatorlar üçün vacib ola bilər
-  }).exec();
-};
+const update = async (id, payload) =>
+  await CategoryModel.findByIdAndUpdate(id, payload, { new: true });
 
 module.exports = {
   getAll,

@@ -7,14 +7,10 @@ const getAll = async ({ page, limit, sortBy, order, filter }) =>
     .skip((page - 1) * limit)
     .limit(limit)
     .populate("category")
-    .populate("vendor", "username")
     .lean();
 
 const getOne = async (id) =>
-  await ProductModel.findById(id)
-    .populate("category")
-    .populate("vendor", "email")
-    .populate("reviews");
+  await ProductModel.findById(id).populate("category");
 
 const getTotalCount = async () => await ProductModel.countDocuments();
 
