@@ -1,4 +1,4 @@
-const ProductModel = require("../models/productModel");
+// const ProductModel = require("../models/productModel");
 const {
   getAll,
   getOne,
@@ -6,7 +6,7 @@ const {
   deleteOne,
   update,
 } = require("../services/categoryService");
-const { deleteMany } = require("../services/productService");
+// const { deleteMany } = require("../services/productService");
 const formatMongoData = require("../utils/formatMongoData");
 
 //get all categories

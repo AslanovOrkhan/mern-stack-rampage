@@ -7,15 +7,16 @@ const categorySchema = new mongoose.Schema(
       trim: true,
       minLength: 2,
       required: true,
+      unique: true, // Data bütövlüyü üçün hər kateqoriyanın adı unikal olmalıdır.
     },
     slug: {
       type: String,
-      required: true,
-      unique: true,
+      required: false,
+      unique: true, // SEO üçün unikal URL təmin edilir.
     },
     categoryImage: {
       type: String,
-      required: true,
+      required: true, // Rampage tərzi vizual təqdimat üçün məcburi şəkildir.
     },
     description: {
       type: String,
@@ -23,19 +24,19 @@ const categorySchema = new mongoose.Schema(
       minLength: 2,
     },
   },
-  { timestamps: true }
+  { timestamps: true } // Yaratma və yenilənmə vaxtlarını izləyir
 );
 
- //category virtual for products
+// Məhsullarla One-to-Many əlaqəsi üçün virtual sahə
 categorySchema.virtual("products", {
   ref: "Product",
   localField: "_id",
   foreignField: "category",
-  justOne: false,
+  justOne: false, // Bir kateqoriyada çox məhsul var.
 });
+
 
 categorySchema.set("toObject", { virtuals: true });
 categorySchema.set("toJSON", { virtuals: true });
 
-module.exports = mongoose.model("Category", categorySchema);
-
+module.exports = categorySchema;
