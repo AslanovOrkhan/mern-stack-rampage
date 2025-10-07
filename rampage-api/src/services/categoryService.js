@@ -1,9 +1,9 @@
 const CategoryModel = require("../models/categoryModel");
 
-const getAll = async () => await CategoryModel.find().populate("products");
 
-const getOne = async (id) =>
-  await CategoryModel.findById(id).populate("products");
+const getAll = async () => await CategoryModel.find();
+
+const getOne = async (id) => await CategoryModel.findById(id);
 
 const post = async (payload) => await CategoryModel.create(payload);
 

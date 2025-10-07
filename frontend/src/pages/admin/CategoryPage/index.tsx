@@ -5,13 +5,51 @@ import { IoSearch } from "react-icons/io5";
 import type { Category } from "../../../types/category";
 import { getCategories, deleteCategory } from "../../../Api/api";
 import Swal from "sweetalert2";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import CreateCategoryModal from "@/components/AddCategoryModal";
+
 
 const CategoryPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
+  const [allCategories, setAllCategories] = useState<Category[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const [modalMode, setModalMode] = useState<'create' | 'update'>('create');
+  const [selectedCategory, setSelectedCategory] = useState<Category | undefined>(undefined);
+  const [search, setSearch] = useState("");
+
+  const fetchCategories = () => {
+    getCategories().then(data => {
+      setAllCategories(data);
+      setCategories(data);
+    }).catch(console.error);
+  };
 
   useEffect(() => {
-    getCategories().then(setCategories).catch(console.error);
+    fetchCategories();
   }, []);
+
+  useEffect(() => {
+    if (!search.trim()) {
+      setCategories(allCategories);
+      return;
+    }
+    const filtered = allCategories.filter(cat => {
+      const term = search.trim().toLowerCase();
+      return (
+        cat.name.toLowerCase().includes(term) ||
+        cat.description.toLowerCase().includes(term)
+      );
+    });
+    setCategories(filtered);
+  }, [search, allCategories]);
+
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+  fetchCategories();
+    }, 400);
+    return () => clearTimeout(delayDebounce);
+  }, [search]);
 
   const handleDelete = (id: string) => {
     Swal.fire({
@@ -26,19 +64,31 @@ const CategoryPage = () => {
     }).then(async (res) => {
       if (!res.isConfirmed) return;
       try {
-        await deleteCategory(id);
-        const fresh = await getCategories();
-        setCategories(fresh);
-        Swal.fire("Silindi!", "Kateqoriya uğurla silindi.", "success");
+  await deleteCategory(id);
+  fetchCategories();
+  toast.success("Kateqoriya uğurla silindi!");
       } catch (e) {
         console.error(e);
-        Swal.fire("Xəta", "Silinmə zamanı problem oldu.", "error");
+  toast.error("Silinmə zamanı problem oldu.");
       }
     });
   };
 
+  const openCreateModal = () => {
+    setModalMode('create');
+    setSelectedCategory(undefined);
+    setShowModal(true);
+  };
+
+  const openUpdateModal = (cat: Category) => {
+    setModalMode('update');
+    setSelectedCategory(cat);
+    setShowModal(true);
+  };
+
   return (
     <div className="p-6">
+      <ToastContainer position="top-right" autoClose={2000} hideProgressBar={false} newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
       <div className="flex justify-between items-center">
         <h1 className="text-white text-2xl font-bold capitalize mb-9">
           category
@@ -48,7 +98,10 @@ const CategoryPage = () => {
             <FaTrashCan className="text-white text-base" />
             <span className="text-white text-base capitalize">delete</span>
           </button>
-          <button className="flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-green-700 cursor-pointer">
+          <button
+            className="flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-green-700 cursor-pointer"
+            onClick={openCreateModal}
+          >
             <FaPlus className="text-white text-base" />
             <span className="text-white text-base capitalize">
               add category
@@ -64,6 +117,8 @@ const CategoryPage = () => {
              focus:placeholder:text-gray-500 dark:placeholder:text-gray-500
              outline-none border-none bg-transparent"
             placeholder="Search by categories name"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
           />
           <IoSearch className="text-gray-400" />
         </div>
@@ -91,7 +146,7 @@ const CategoryPage = () => {
             <tbody>
               {categories.map((cat, idx) => (
                 <tr
-                  key={cat._id ?? `row-${idx}`} // 🔑 fallback əlavə olundu
+                  key={cat.id ?? `row-${idx}`}
                   className="dark:bg-gray-800 dark:border-gray-700 border-b border-gray-300"
                 >
                   <td className="px-6">
@@ -111,15 +166,24 @@ const CategoryPage = () => {
                   <td className="px-6">{cat.name}</td>
                   <td className="px-6">{cat.description}</td>
                   <td className="px-6">
-                    <button className="border-none outline-none bg-transparent">
+                    <button className="border-none outline-none bg-transparent" onClick={() => openUpdateModal(cat)}>
                       <FaEdit className="text-gray-400 text-xl cursor-pointer" />
                     </button>
-                    <button
-                      className="border-none outline-none bg-transparent ml-3"
-                      onClick={() => handleDelete(cat._id)}
-                    >
-                      <FaTrashCan className="text-gray-400 text-lg cursor-pointer" />
-                    </button>
+                    {cat.id ? (
+                      <button
+                        className="border-none outline-none bg-transparent ml-3"
+                        onClick={() => handleDelete(cat.id as string)}
+                      >
+                        <FaTrashCan className="text-gray-400 text-lg cursor-pointer" />
+                      </button>
+                    ) : (
+                      <button
+                        className="border-none outline-none bg-transparent ml-3 opacity-50 cursor-not-allowed"
+                        disabled
+                      >
+                        <FaTrashCan className="text-gray-400 text-lg" />
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -135,6 +199,16 @@ const CategoryPage = () => {
           </table>
         </div>
       </div>
+      {showModal && (
+        <CreateCategoryModal
+          onClose={() => {
+            setShowModal(false);
+            fetchCategories();
+          }}
+          mode={modalMode}
+          category={selectedCategory}
+        />
+      )}
     </div>
   );
 };

@@ -32,8 +32,13 @@ exports.getCategoryById = async (req, res, next) => {
 };
 
 //post
+const slugify = require("slugify");
 exports.postCategory = async (req, res, next) => {
   try {
+    if (req.file) {
+      req.body.image = req.file.path || req.file.url || "";
+    }
+    req.body.slug = slugify(req.body.name, { lower: true, strict: true });
     const newCategory = await post(req.body);
     res.status(201).json(formatMongoData(newCategory));
   } catch (error) {
@@ -45,25 +50,9 @@ exports.postCategory = async (req, res, next) => {
 exports.deleteCategory = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { cascade } = req.query;
-    const relatedProducts = await getOne(id);
-
-    if (cascade === "true") {
-      const deletedCategory = await deleteOne(id);
-      if (!deletedCategory) throw new Error("category not found!");
-      //additional products delete
-      await deleteMany(id);
-      res.status(200).json(formatMongoData(deletedCategory));
-    }
-    if (relatedProducts.products.length > 0) {
-      res.status(405).json({
-        message: "cannot delete this category, it has related products!",
-      });
-    } else {
-      const deletedCategory = await deleteOne(id);
-      if (!deletedCategory) throw new Error("category not found!");
-      res.status(200).json(formatMongoData(deletedCategory));
-    }
+    const deletedCategory = await deleteOne(id);
+    if (!deletedCategory) throw new Error("category not found!");
+    res.status(200).json(formatMongoData(deletedCategory));
   } catch (error) {
     next(error);
   }

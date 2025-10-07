@@ -2,8 +2,12 @@ import type { Category } from "../types/category";
 
 const API_URL = "http://localhost:5050";
 
-export async function getCategories(): Promise<Category[]> {
-  const res = await fetch(`${API_URL}/categories`);
+export async function getCategories(search?: string): Promise<Category[]> {
+  let url = `${API_URL}/categories`;
+  if (search && search.trim()) {
+    url += `?search=${encodeURIComponent(search.trim())}`;
+  }
+  const res = await fetch(url);
   if (!res.ok) throw new Error("Kategoriya alınmadı");
   return res.json();
 }
