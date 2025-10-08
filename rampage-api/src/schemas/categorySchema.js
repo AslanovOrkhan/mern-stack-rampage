@@ -26,5 +26,4 @@ const categorySchema = new mongoose.Schema(
   { timestamps: true, versionKey: false }
 );
 
-// Məhsullarla One-to-Many əlaqəsi üçün virtual sahə
 module.exports = categorySchema;

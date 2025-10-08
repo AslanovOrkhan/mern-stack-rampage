@@ -1,4 +1,5 @@
-import React, { useState, ChangeEvent, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import type { ChangeEvent } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -49,7 +50,11 @@ const CreateCategoryModal: React.FC<CreateCategoryModalProps> = ({ onClose, mode
     const formData = new FormData();
     formData.append("name", name);
     formData.append("description", description);
-    if (imageFile) formData.append("image", imageFile);
+    if (imageFile) {
+      formData.append("image", imageFile);
+    } else if (mode === "update" && category?.image) {
+      formData.append("image", category.image);
+    }
 
     try {
       let response;

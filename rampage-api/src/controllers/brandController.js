@@ -1,4 +1,3 @@
-// const ProductModel = require("../models/productModel");
 const {
   getAll,
   getOne,
@@ -6,8 +5,9 @@ const {
   deleteOne,
   update,
 } = require("../services/brandService");
-// const { deleteMany } = require("../services/productService");
+
 const formatMongoData = require("../utils/formatMongoData");
+
 
 //get all brands
 exports.getBrands = async (_, res, next) => {
@@ -32,8 +32,13 @@ exports.getBrandById = async (req, res, next) => {
 };
 
 //post
+const slugify = require("slugify");
 exports.postBrand = async (req, res, next) => {
   try {
+    if (req.file) {
+      req.body.image = req.file.path || req.file.url || "";
+    }
+    req.body.slug = slugify(req.body.name, { lower: true, strict: true });
     const newBrand = await post(req.body);
     res.status(201).json(formatMongoData(newBrand));
   } catch (error) {
@@ -45,24 +50,9 @@ exports.postBrand = async (req, res, next) => {
 exports.deleteBrand = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { cascade } = req.query;
-    const relatedProducts = await getOne(id);
-
-    if (cascade === "true") {
-      const deletedBrand = await deleteOne(id);
-      if (!deletedBrand) throw new Error("brand not found!");
-       await deleteMany(id);
-      res.status(200).json(formatMongoData(deletedBrand));
-    }
-    if (relatedProducts.products.length > 0) {
-      res.status(405).json({
-        message: "cannot delete this category, it has related products!",
-      });
-    } else {
-      const deletedBrand = await deleteOne(id);
-      if (!deletedBrand) throw new Error("brand not found!");
-      res.status(200).json(formatMongoData(deletedBrand));
-    }
+    const deletedBrand = await deleteOne(id);
+    if (!deletedBrand) throw new Error("brand not found!");
+    res.status(200).json(formatMongoData(deletedBrand));
   } catch (error) {
     next(error);
   }

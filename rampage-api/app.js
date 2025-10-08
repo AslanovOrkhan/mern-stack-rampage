@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const productRouter = require("./src/routes/productRoute");
 const categoryRouter = require("./src/routes/categoryRoute");
-// const brandRouter = require("./src/routes/brandRoute");
+const brandRouter = require("./src/routes/brandRoute");
 // const sliderRouter = require("./src/routes/sliderRoute");
 const errorHandler = require("./src/middlewares/errorHandler");
 const helmet = require("helmet");
@@ -21,7 +21,7 @@ app.use(helmet());
 
 app.use("/products", productRouter);
 app.use("/categories", categoryRouter);
-// app.use("/brands", brandRouter);
+app.use("/brands", brandRouter);
 // app.use("/sliders", sliderRouter);
 
 //global error handler - ERROR BOUNDARY

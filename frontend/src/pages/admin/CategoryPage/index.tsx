@@ -44,12 +44,6 @@ const CategoryPage = () => {
     setCategories(filtered);
   }, [search, allCategories]);
 
-  useEffect(() => {
-    const delayDebounce = setTimeout(() => {
-  fetchCategories();
-    }, 400);
-    return () => clearTimeout(delayDebounce);
-  }, [search]);
 
   const handleDelete = (id: string) => {
     Swal.fire({

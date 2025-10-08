@@ -27,4 +27,23 @@ const categoryValidationSchema = Joi.object({
     })
 });
 
-module.exports = categoryValidationSchema;
+const categoryUpdateValidationSchema = Joi.object({
+  name: Joi.string()
+    .min(2)
+    .max(50)
+    .messages({
+      "string.min": "Ad ən azı 2 simvol olmalıdır."
+    }),
+  description: Joi.string()
+    .min(2)
+    .max(500)
+    .messages({
+      "string.min": "Təsvir ən azı 2 simvol olmalıdır."
+    }),
+  image: Joi.string()
+});
+
+module.exports = {
+  categoryValidationSchema,
+  categoryUpdateValidationSchema
+};

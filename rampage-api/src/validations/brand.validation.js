@@ -1,16 +1,13 @@
 const Joi = require("joi");
 
 const brandValidationSchema = Joi.object({
-  name: Joi.string().min(2).max(30).required(),
-  
-  // Mongoose Schema-ya uyğun olaraq optional (məcburi deyil) qoyulur
-  description: Joi.string().min(10).max(500).optional().allow(null, ''),
-  
-  // Mongoose Schema-ya uyğun olaraq required (mütləq) qoyulur və URL formatını yoxlayır
-  image: Joi.string().uri().required(), 
-
-  // Əgər client tərəfdən göndərilməsi tələb olunursa əlavə edin, əks halda silin:
-  public_id: Joi.string().optional(), 
+  name: Joi.string().min(2).max(50).required().messages({
+    "any.required": "Kateqoriya adı məcburidir.",
+    "string.min": "Ad ən azı 2 simvol olmalıdır.",
+  }),
+  image: Joi.string().required().messages({
+    "any.required": "Kateqoriya şəkli məcburidir.",
+  }),
 });
 
 module.exports = brandValidationSchema;

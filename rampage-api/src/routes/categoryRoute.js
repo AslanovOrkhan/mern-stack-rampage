@@ -38,7 +38,7 @@ router.patch(
     }
     next();
   },
-  validateCategory,
+  validateCategory("update"),
   updateCategory
 );
 
