@@ -14,8 +14,8 @@ const CategoryPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [allCategories, setAllCategories] = useState<Category[]>([]);
   const [showModal, setShowModal] = useState(false);
-  const [modalMode, setModalMode] = useState<'create' | 'update'>('create');
-  const [selectedCategory, setSelectedCategory] = useState<Category | undefined>(undefined);
+  const [ setModalMode] = useState<'create' | 'update'>('create');
+  const [setSelectedCategory] = useState<Category | undefined>(undefined);
   const [search, setSearch] = useState("");
 
   const fetchCategories = () => {
@@ -199,8 +199,6 @@ const CategoryPage = () => {
             setShowModal(false);
             fetchCategories();
           }}
-          mode={modalMode}
-          category={selectedCategory}
         />
       )}
     </div>

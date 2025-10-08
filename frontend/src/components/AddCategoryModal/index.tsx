@@ -1,30 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import type { Category } from "@/types/category";
-
 interface CreateCategoryModalProps {
   onClose: () => void;
-  mode?: "create" | "update";
-  category?: Category;
 }
 
-const CreateCategoryModal: React.FC<CreateCategoryModalProps> = ({ onClose, mode = "create", category }) => {
+const CreateCategoryModal: React.FC<CreateCategoryModalProps> = ({ onClose }) => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (mode === "update" && category) {
-      setName(category.name);
-      setDescription(category.description);
-      setImagePreviewUrl(category.image || null);
-    }
-  }, [mode, category]);
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => setName(e.target.value);
   const handleDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value);
@@ -36,13 +24,13 @@ const CreateCategoryModal: React.FC<CreateCategoryModalProps> = ({ onClose, mode
       const url: string = URL.createObjectURL(file);
       setImagePreviewUrl(url);
     } else {
-      setImagePreviewUrl(category?.image || null);
+      setImagePreviewUrl(null);
     }
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!name || !description || (mode === "create" && !imageFile && !imagePreviewUrl)) {
+    if (!name || !description || !imageFile) {
       alert("Bütün sahələri doldurun!");
       return;
     }
@@ -50,27 +38,15 @@ const CreateCategoryModal: React.FC<CreateCategoryModalProps> = ({ onClose, mode
     const formData = new FormData();
     formData.append("name", name);
     formData.append("description", description);
-    if (imageFile) {
-      formData.append("image", imageFile);
-    } else if (mode === "update" && category?.image) {
-      formData.append("image", category.image);
-    }
+    formData.append("image", imageFile);
 
     try {
-      let response;
-      if (mode === "create") {
-        response = await fetch("http://localhost:5050/categories", {
-          method: "POST",
-          body: formData
-        });
-      } else if (mode === "update" && category?.id) {
-        response = await fetch(`http://localhost:5050/categories/${category.id}`, {
-          method: "PATCH",
-          body: formData
-        });
-      }
+      const response = await fetch("http://localhost:5050/categories", {
+        method: "POST",
+        body: formData
+      });
       if (response && response.ok) {
-        toast.success(mode === "create" ? "Kateqoriya uğurla yaradıldı!" : "Kateqoriya uğurla yeniləndi!");
+        toast.success("Kateqoriya uğurla yaradıldı!");
         onClose();
       } else {
         const data = response ? await response.json() : {};
@@ -91,7 +67,7 @@ const CreateCategoryModal: React.FC<CreateCategoryModalProps> = ({ onClose, mode
         
         <div className="flex justify-between items-start border-b pb-4 mb-6">
           <h2 className="text-2xl font-semibold text-gray-800">
-            {mode === "create" ? "Yeni Kateqoriya Yarat" : "Kateqoriyanı Redaktə Et"}
+            Yeni Kateqoriya Yarat
           </h2>
           <button
             onClick={onClose}
@@ -178,7 +154,7 @@ const CreateCategoryModal: React.FC<CreateCategoryModalProps> = ({ onClose, mode
               type="submit"
               className="w-full py-3 px-4 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50 transition duration-150"
             >
-              {mode === "create" ? "Kateqoriyanı Yarat" : "Kateqoriyanı Yenilə"}
+              "Kateqoriyanı Yarat"
             </button>
           </div>
         </form>
