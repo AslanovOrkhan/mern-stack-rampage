@@ -30,17 +30,6 @@ router.post(
 );
 
 router.delete("/:id", deleteCampaign);
-router.patch(
-  "/:id",
-  upload.single("image"),
-  (req, res, next) => {
-    if (req.file) {
-      req.body.image = req.file.path || req.file.url || "";
-    }
-    next();
-  },
-  validateCampaign,
-  updateCampaign
-);
+router.patch("/:id", validateCampaign, updateCampaign);
 
 module.exports = router

@@ -10,9 +10,10 @@ const formatMongoData = require("../utils/formatMongoData");
 
 
 //get all campaigns
-exports.getCampaigns = async (_, res, next) => {
+exports.getCampaigns = async (req, res, next) => {
   try {
-    const campaigns = await getAll();
+    const { search } = req.query;
+    const campaigns = await getAll(search);
     res.status(200).json(formatMongoData(campaigns));
   } catch (error) {
     next(error);
@@ -32,13 +33,12 @@ exports.getCampaignById = async (req, res, next) => {
 };
 
 //post
-const slugify = require("slugify");
 exports.postCampaign = async (req, res, next) => {
   try {
     if (req.file) {
       req.body.image = req.file.path || req.file.url || "";
     }
-    req.body.slug = slugify(req.body.name, { lower: true, strict: true });
+    // No slug needed for campaigns, only description
     const newCampaign = await post(req.body);
     res.status(201).json(formatMongoData(newCampaign));
   } catch (error) {

@@ -1,7 +1,13 @@
 const CampaignsModel = require("../models/campaignsModel");
 
 
-const getAll = async () => await CampaignsModel.find();
+const getAll = async (search) => {
+  let query = {};
+  if (search) {
+    query.description = { $regex: search, $options: "i" };
+  }
+  return await CampaignsModel.find(query);
+};
 
 const getOne = async (id) => await CampaignsModel.findById(id);
 

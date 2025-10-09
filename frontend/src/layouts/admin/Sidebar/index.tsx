@@ -63,6 +63,9 @@ const Sidebar = () => {
               <li className={`transform transition-all duration-200 delay-150 ${catalogOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'}`}>
                 <Link to="/admin/campaigns-management" className="text-[#9CA3AF] hover:text-white transition-colors text-sm flex items-center gap-3"><TfiLayoutLineSolid /> Campaigns</Link>
               </li>
+              <li className={`transform transition-all duration-200 delay-150 ${catalogOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'}`}>
+                <Link to="/admin/slider-management" className="text-[#9CA3AF] hover:text-white transition-colors text-sm flex items-center gap-3"><TfiLayoutLineSolid /> Slider</Link>
+              </li>
             </ul>
           </div>
         </li> 

@@ -13,6 +13,7 @@ import Login from "../pages/shared/Login";
 import ProductManagementDetail from "@/pages/admin/ProductManagementDetail";
 import BrandsPage from "../pages/client/BrandsPage";
 import CampaignsManagement from "@/pages/admin/CompaignsManagement";
+import SliderManagement from "@/pages/admin/SliderManagement";
 
 const ROUTES = [
   // client
@@ -74,6 +75,10 @@ const ROUTES = [
       {
         path: "brand-management",
         element: <BrandManagement />,
+      },
+      {
+        path: "slider-management",
+        element: <SliderManagement />,
       },
       {
         path: "campaigns-management",

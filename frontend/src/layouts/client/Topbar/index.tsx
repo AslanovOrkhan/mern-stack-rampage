@@ -10,7 +10,41 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/navigation";
 import "swiper/css";
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
+import { useEffect, useState } from "react";
+import { getCampaigns, type Campaign } from "../../../Api/campaignApi";
+
 const Topbar = () => {
+  const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch campaigns from backend
+  const fetchCampaigns = async () => {
+    try {
+      setLoading(true);
+      const data = await getCampaigns();
+      setCampaigns(data);
+    } catch (err) {
+      console.error('Error fetching campaigns:', err);
+      // If error, use default slides
+      setCampaigns([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchCampaigns();
+  }, []);
+
+  // Default slides if no campaigns
+  const defaultSlides = [
+    "FREE DELIVERY FOR ORDERS OVER 1000 TL",
+    "3-INSTALLMENT OPPORTUNITY WITHOUT INTEREST"
+  ];
+
+  // Use campaigns if available, otherwise use default slides
+  const slides = campaigns.length > 0 ? campaigns : defaultSlides.map((text, index) => ({ id: `default-${index}`, description: text }));
+
   return (
     <>
       <section className="flex items-center justify-between bg-[#1F1F1F] lg:px-10 px-2">
@@ -39,16 +73,24 @@ const Topbar = () => {
             modules={[Navigation]}
             className="mySwiper"
           >
-            <SwiperSlide className="h-16 w-full flex relative overflow-hidden items-center justify-center bg-transparent">
-              <span className="w-full m-0 p-0 uppercase text-white lg:text-[18px] text-[12px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-                free delivery for orders over 1000 tl
-              </span>
-            </SwiperSlide>
-            <SwiperSlide className="h-16 w-full flex relative items-center justify-center bg-transparent">
-              <span className="w-full m-0 p-0 uppercase text-white lg:text-[18px] text-[12px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-               3-INSTALLMENT OPPORTUNITY WITHOUT INTEREST
-              </span>
-            </SwiperSlide>
+            {loading ? (
+              <SwiperSlide className="h-16 w-full flex relative overflow-hidden items-center justify-center bg-transparent">
+                <span className="w-full m-0 p-0 uppercase text-white lg:text-[18px] text-[12px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                  Loading campaigns...
+                </span>
+              </SwiperSlide>
+            ) : (
+              slides.map((slide) => (
+                <SwiperSlide 
+                  key={slide.id} 
+                  className="h-16 w-full flex relative overflow-hidden items-center justify-center bg-transparent"
+                >
+                  <span className="w-full m-0 p-0 uppercase text-white lg:text-[18px] text-[12px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                    {slide.description}
+                  </span>
+                </SwiperSlide>
+              ))
+            )}
           </Swiper>
         </div>
         <div className="lg:flex hidden items-center gap-4 text-xl  py-5">
