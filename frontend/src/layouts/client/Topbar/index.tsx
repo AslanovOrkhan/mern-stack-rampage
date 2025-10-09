@@ -52,16 +52,16 @@ const Topbar = () => {
           </Swiper>
         </div>
         <div className="lg:flex hidden items-center gap-4 text-xl  py-5">
-          <a href="#">
+          <a href="https://www.facebook.com/RampageTurkey">
             <FaFacebookF className="text-lg text-white" />
           </a>
-          <a href="#">
+          <a href=" https://twitter.com/Rampage_Turkey">
             <FaXTwitter className="text-lg text-white" />
           </a>
-          <a href="#">
+          <a href="https://www.instagram.com/rampage.tr/">
             <FaInstagram className="text-lg text-white" />
           </a>
-          <a href="#">
+          <a href="https://www.youtube.com/@rampageofficial">
             <FaYoutube className="text-lg text-white" />
           </a>
         </div>

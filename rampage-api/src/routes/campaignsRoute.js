@@ -1,20 +1,20 @@
 const express = require("express");
 const {
-  getCategories,
-  getCategoryById,
-  postCategory,
-  deleteCategory,
-  updateCategory,
-} = require("../controllers/categoryController");
+  getCampaigns,
+  getCampaignById,
+  postCampaign,
+  deleteCampaign,
+  updateCampaign,
+} = require("../controllers/campaignsController");
 const logger = require("../middlewares/logger");
-const validateCategory = require("../middlewares/validations/categoryValidate");
+const validateCampaign = require("../middlewares/validations/campaignsValidate");
 const uploadMiddleware = require("../middlewares/uploadMiddleware");
 const router = express.Router();
 
-const upload = uploadMiddleware("categoryImages");
+const upload = uploadMiddleware("campaignImages");
 
-router.get("/", logger, getCategories);
-router.get("/:id", getCategoryById);
+router.get("/", logger, getCampaigns);
+router.get("/:id", getCampaignById);
 router.post(
   "/",
   upload.single("image"),
@@ -25,10 +25,11 @@ router.post(
     }
     next();
   },
-  validateCategory,
-  postCategory
+  validateCampaign,
+  postCampaign
 );
-router.delete("/:id", deleteCategory);
+
+router.delete("/:id", deleteCampaign);
 router.patch(
   "/:id",
   upload.single("image"),
@@ -38,8 +39,8 @@ router.patch(
     }
     next();
   },
-  validateCategory,
-  updateCategory
+  validateCampaign,
+  updateCampaign
 );
 
-module.exports = router;
+module.exports = router

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { FaPlus, FaTrashCan } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
-import { getBrands } from "@/Api/api";
+import { getBrands } from "@/Api/brandApi";
 import { deleteBrand } from "@/Api/brandApi";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
@@ -153,12 +153,13 @@ const BrandManagement = () => {
                 </tr>
               </thead>
               <tbody>
-                {brands.length > 0 ? (
-                  brands
-                    .filter((b) =>
-                      b.name.toLowerCase().includes(search.toLowerCase())
-                    )
-                    .map((brand, idx) => (
+                {(() => {
+                  const filteredBrands = brands.filter((b) =>
+                    b.name.toLowerCase().includes(search.toLowerCase())
+                  );
+
+                  if (filteredBrands.length > 0) {
+                    return filteredBrands.map((brand, idx) => (
                       <tr
                         key={brand.id ?? `row-${idx}`}
                         className="dark:bg-gray-800 dark:border-gray-700 border-b border-gray-300"
@@ -248,17 +249,27 @@ const BrandManagement = () => {
                           </button>
                         </td>
                       </tr>
-                    ))
-                ) : (
-                  <tr key="no-brand">
-                    <td
-                      colSpan={4}
-                      className="px-6 py-4 text-center text-xl text-gray-500 font-semibold"
-                    >
-                      No brands found
-                    </td>
-                  </tr>
-                )}
+                    ));
+                  } else {
+                    return (
+                      <tr key="no-brand">
+                        <td
+                          colSpan={4}
+                          className="px-6 py-4 relative font-semibold"
+                        >
+                          <div className="w-full flex items-center justify-center gap-6">
+                            <img
+                              src="https://cdn2.iconfinder.com/data/icons/visual-empty-state/32/No_Data_Found_Not_Found_Lost_Searching_Search-512.png"
+                              className="w-20 h-20 object-cover"
+                              alt=""
+                            />
+                            <span className="text-gray-500 text-2xl">No brands found</span>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  }
+                })()}
               </tbody>
             </table>
           </div>
