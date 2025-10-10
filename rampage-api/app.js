@@ -4,7 +4,7 @@ const productRouter = require("./src/routes/productRoute");
 const categoryRouter = require("./src/routes/categoryRoute");
 const brandRouter = require("./src/routes/brandRoute");
 const campaignRouter = require("./src/routes/campaignsRoute");
-// const sliderRouter = require("./src/routes/sliderRoute");
+const sliderRouter = require("./src/routes/sliderRoute");
 const errorHandler = require("./src/middlewares/errorHandler");
 
 // Import models to register them
@@ -13,6 +13,7 @@ require("./src/models/campaignsModel"); // Fixed typo in filename
 require("./src/models/categoryModel");
 require("./src/models/brandModel");
 require("./src/models/productModel");
+require("./src/models/sliderModel");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const app = express();
@@ -35,7 +36,7 @@ app.use("/products", productRouter);
 app.use("/categories", categoryRouter);
 app.use("/brands", brandRouter);
 app.use("/campaigns", campaignRouter);
-// app.use("/sliders", sliderRouter);
+app.use("/sliders", sliderRouter);
 
 //global error handler - ERROR BOUNDARY
 app.use(errorHandler);
